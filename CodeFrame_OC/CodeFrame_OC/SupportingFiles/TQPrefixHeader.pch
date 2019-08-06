@@ -1,0 +1,69 @@
+//
+//  TQPrefixHeader.pch
+//  CodeFrame_OC
+//
+//  Created by 何太强 on 2019/8/6.
+//  Copyright © 2019 何太强. All rights reserved.
+//
+
+#ifndef TQPrefixHeader_pch
+#define TQPrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#pragma mark - ===================打印日志===========================
+
+#ifdef DEBUG
+
+#define DLog(format, ...) printf("class: <%p %s:(%d) > method: %s \n%s\n", self, [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, __PRETTY_FUNCTION__, [[NSString stringWithFormat:(format), ##__VA_ARGS__] UTF8String] );
+
+
+#else
+
+#define DLog(format, ...)
+
+
+#endif
+
+#pragma mark - ===================RGB颜色取值===========================
+#define KMainColor UIColorFromHex(0xCE0B0B)
+#define ColorFromRGB(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
+#define ColorFromRGBA(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+
+#define UIColorFromHex(hexValue) [UIColor \
+colorWithRed:((float)((hexValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((hexValue & 0xFF00) >> 8))/255.0 \
+blue:((float)(hexValue & 0xFF))/255.0 alpha:1.0]
+
+#pragma mark - ===================屏幕宽高===========================
+//屏幕的物理尺寸
+#define kScreenWidth [UIScreen mainScreen].bounds.size.width
+#define kScreenHeight [UIScreen mainScreen].bounds.size.height
+#define getHeight(y)     ((y)*kScreenHeight/1334.0)
+#define getWidth(x)       ((x)*kScreenWidth/750.0)
+
+#define KStatusHeight [[UIApplication sharedApplication] statusBarFrame].size.height // 状态栏高度
+#define KNavbarHeight self.navigationController.navigationBar.frame.size.height // 导航高度
+
+#define TQ_StatusBarHeight [[UIApplication sharedApplication] statusBarFrame].size.height //状态栏高度
+#define TQ_NavBarHeight 44.0
+#define TQ_TabBarHeight ([[UIApplication sharedApplication] statusBarFrame].size.height>20?83:49) //底部tabbar高度
+#define TQ_TopHeight (TQ_StatusBarHeight + TQ_NavBarHeight) //整个导航栏高度
+
+#define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
+
+#import <Masonry.h>
+#import "MJRefresh.h"
+#import "MJExtension.h"
+#import "MBProgressHUD.h"
+#import "UIImageView+WebCache.h"
+#import "TQCommon.h"
+#import "UIImage+Color.h"
+#import "HWPopTool.h"
+#import "TQ_Api.h"
+#import "UIView+HUD.h"
+#import "TQNotifyConst.h"
+
+
+#endif /* TQPrefixHeader_pch */
